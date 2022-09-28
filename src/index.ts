@@ -36,6 +36,4 @@ const port:number =  5000;
 const app = new App().app;
 app.listen(port,()=>{
     console.log(`Running on port ${port}`);
-  //  console.log(process.env.DB_USER); // mengambil data .env
-  //  console.log(process.env.DB_HOST); // mengambil data .env
 });
