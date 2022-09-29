@@ -1,36 +1,34 @@
 import { Request, Response } from "express";
 import IController from "./ControllerInterface";
 const db = require("../db/models");
+import TodoService from "../services/TodoService";
 
 class TodoController implements IController {
   index = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const data = await db.todo.findAll({});
-      return res.status(200).send(data);
+      const service:TodoService =  new TodoService(req);
+      const todos = await service.getAll();
+      return res.status(200).send(todos);
     } catch (error) {
       console.log(error);
       return res.status(400).send("Error");
     }
   };
   create = async (req: Request, res: Response): Promise<Response> => {
-    const { description } = req.body;
-    const { id } = req.app.locals.credential;
     try {
-      const createData = await db.todo.create({
-        user_id: id,
-        description,
-      });
-      return res.status(200).send(createData);
+      const service:TodoService =  new TodoService(req);
+      const todos = await service.store();
+      return res.status(200).send(todos);
     } catch (error) {
       return res.status(400).send(error);
     }
   };
   show = async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
     try {
-      const data = await db.todo.findOne({ where: { id } });
-      if (data) {
-        return res.status(200).send(data);
+      const service:TodoService =  new TodoService(req);
+      const todos = await service.getOne();
+      if (todos) {
+        return res.status(200).send(todos);
       } else {
         return res.status(400).send("Data not found!");
       }
@@ -40,12 +38,12 @@ class TodoController implements IController {
     }
   };
   update = async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
+    const service:TodoService =  new TodoService(req);
     try {
-      const data = await db.todo.findOne({ where: { id } });
-      if (data) {
+      const todos = await service.getOne();
+      if (todos) {
         try {
-          await db.todo.update(req.body, { where: { id: id } });
+          await service.update();
           return res.status(200).send("Success update");
         } catch (error) {
           return res.status(400).send("error");
@@ -59,12 +57,12 @@ class TodoController implements IController {
     }
   };
   delete = async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
+    const service:TodoService =  new TodoService(req);
     try {
-      const data = await db.todo.findOne({ where: { id } });
+      const data = await service.getOne();
       if (data) {
         try {
-          await db.todo.destroy({ where: { id: id } });
+          await service.delete();
           return res.status(200).send("Success delete");
         } catch (error) {
           return res.status(400).send("error");
