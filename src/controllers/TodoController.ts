@@ -20,7 +20,7 @@ class TodoController implements IController{
             });
             return res.status(200).send(createData);
         } catch (error) {
-            return res.status(200).send(error);
+            return res.status(400).send(error);
         }
     }
     show = async(req: Request, res: Response): Promise<Response> => {
