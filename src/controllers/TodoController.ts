@@ -13,10 +13,11 @@ class TodoController implements IController{
       }
     }
     create = async (req: Request, res: Response): Promise<Response> => {
-        const {user_id,description} = req.body;
+        const {description} = req.body;
+        const {id} =  req.app.locals.credential;
         try {
             const createData = await db.todo.create({
-                user_id,description
+                user_id:id,description
             });
             return res.status(200).send(createData);
         } catch (error) {
