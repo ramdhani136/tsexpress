@@ -5,7 +5,7 @@ import AuthValidator from "../middleware/AuthValidator"; // middleware
 class AuthRoutes  extends BaseRoutes{
     public  routes(): void {
         this.router.post("/register",AuthValidator, AuthController.register);
-        this.router.post("/login",AuthController.login);
+        this.router.post("/login",AuthValidator, AuthController.login);
     }
     
 }
