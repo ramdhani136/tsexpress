@@ -75,9 +75,7 @@ class TodoController implements IController{
             console.log(error);
             return res.status(400).send("Error");
           }
-        
     }
-    
 }
 
 export default new TodoController();
