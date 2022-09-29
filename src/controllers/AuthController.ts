@@ -1,12 +1,14 @@
 import { Request,Response } from "express";
 const db = require("../db/models");
+import PasswordHash from "../utils/PasswordHash";
 
 class AuthController {
     register =  async(req: Request, res: Response): Promise<Response> => {
       const {username,password} = req.body;
+      const hashedPassword: string = await PasswordHash.hash(password);
       const createdUser = await db.user.create({
         username,
-        password
+        password :hashedPassword
       });
       
       try {
