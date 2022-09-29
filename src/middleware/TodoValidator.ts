@@ -2,21 +2,20 @@ import { Request, Response, NextFunction } from "express";
 import { check, validationResult } from "express-validator";
 
 
-class AuthValidator{
+class TodoValidator{
     public static validate = [
-        check('username').isString(),
-        check('password').isLength({min:6}),
+        check('description').isString(),
         (req:Request,res:Response,next:NextFunction)=>{
             const errors = validationResult(req);
     
             if(!errors.isEmpty()){
                 return res.status(422).send({errors:errors.array()});
             }else{
-              return next();
+               return next();
             }
         }
     ]
     
 }
 
-export default AuthValidator.validate;
+export default TodoValidator.validate;
