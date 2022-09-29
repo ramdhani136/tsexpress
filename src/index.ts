@@ -7,6 +7,7 @@ import cors from 'cors';
 import UserRoutes from './routers/UserRoutes';
 import AuthRoutes from './routers/AuthRoutes';
 import {config as dotenv} from 'dotenv'; // membaca file .env menyimpan data rahasia di .env
+import TodoRoutes from './routers/TodoRoutes';
 
 class App{
     public app:Application;
@@ -29,6 +30,7 @@ class App{
     protected routes():void{
        this.app.use('/users',UserRoutes);
        this.app.use('/auth',AuthRoutes);
+       this.app.use('/todo',TodoRoutes);
     }
 }
 

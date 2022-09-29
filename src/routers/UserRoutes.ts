@@ -7,10 +7,10 @@ import {auth} from "../middleware/AuthMiddleware";
 class UserRoutes extends BaseRoutes{
     public  routes(): void {
         this.router.get("/",auth,UsersController.index);
-        this.router.route("/").post(UsersController.create);
-        this.router.route("/:id").get(UsersController.show);
-        this.router.route("/:id").put(UsersController.update);
-        this.router.route("/:id").delete(UsersController.delete);
+        this.router.post("/",UsersController.create);
+        this.router.get("/:id",UsersController.show);
+        this.router.put("/:id",UsersController.update);
+        this.router.delete("/:id",UsersController.delete);
     }
 }
 

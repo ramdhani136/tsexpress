@@ -28,16 +28,15 @@ class AuthController {
          if(user){
           let compare = await Authentication.passwordCompare(password,user.password);
           if(compare){
+            //generate token
             const token =await Authentication.generateToken(user.id,user.username,user.password);
             return res.status(200).json({token});
           }else{
             return res.status(403).send("Wrong Password");
           }
-        
          }
-
          return res.send("User Not found!");
-        //generate token
+       
     }
    
     
