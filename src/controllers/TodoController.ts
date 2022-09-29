@@ -5,20 +5,20 @@ const db = require("../db/models");
 
 
 class TodoController implements IController{
-    index(req: Request, res: Response): Response {
-      return res.send("");
+    index = async(req: Request, res: Response): Promise<Response> => {
+      return res.send("index");
     }
-    create(req: Request, res: Response): Response {
-        return res.send("");
+    create = async (req: Request, res: Response): Promise<Response> => {
+        return res.send("create");
     }
-    show(req: Request, res: Response): Response {
-        return res.send("");
+    show = async(req: Request, res: Response): Promise<Response> => {
+        return res.send("show");
     }
-    update(req: Request, res: Response): Response {
-        return res.send("");
+    update = async(req: Request, res: Response): Promise<Response> => {
+        return res.send("update");
     }
-    delete(req: Request, res: Response): Response {
-        return res.send("");
+    delete = async(req: Request, res: Response): Promise<Response> => {
+        return res.send("delete");
         
     }
     
