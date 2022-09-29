@@ -4,6 +4,7 @@ import TodoController from "../controllers/TodoController";
 //middleware
 import AuthMiddleware from "../middleware/AuthMiddleware";
 import TodoValidator from "../middleware/TodoValidator";
+
 class TodoRoutes extends BaseRoutes{
     public  routes(): void {
         this.router.get("/",AuthMiddleware,TodoController.index);

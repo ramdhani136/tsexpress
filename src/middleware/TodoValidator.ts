@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { check, validationResult } from "express-validator";
 
-
 class TodoValidator{
     public static validate = [
         check('description').isString(),
@@ -11,7 +10,7 @@ class TodoValidator{
             if(!errors.isEmpty()){
                 return res.status(422).send({errors:errors.array()});
             }else{
-               return next();
+                return next();
             }
         }
     ]
