@@ -14,7 +14,6 @@ class TodoValidator{
             }
         }
     ]
-    
 }
 
 export default TodoValidator.validate;
